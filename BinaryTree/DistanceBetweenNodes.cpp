@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+// Distance between two nodes is the sum of LCA of nodes to node 1+Lca of nodes to node 2
 class node
 {
 public:
