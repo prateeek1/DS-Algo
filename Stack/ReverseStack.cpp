@@ -15,26 +15,31 @@ void transfer(stack<int>&s1, stack<int>&s2, int n)
 }
 
 
-
-void reverseStack(stack<int>&s1)
+void insertAtBottom(stack<int>&s, int x)
 {
-	stack<int>s2;
-	int n = s1.size();
-	for (int i = 0; i < n; i++)
+	if (s.empty())
 	{
-		// pick the element from top and insert at bottom
-		int x = s1.top();
-		s1.pop();
-
-		// tansfer n-i-1 elemnts from s1 to s2
-		transfer(s1, s2, n - i - 1);
-
-		// insert the element x in s1
-		s1.push(x);
-
-		// transfer the element from s2 to s1
-		transfer(s2, s1, n - i - 1);
+		s.push(x);
+		return;
 	}
+	// rec case
+	int data = s.top();
+	s.pop();
+	insertAtBottom(s, x);
+	s.push(data);
+}
+
+
+void reverseStack(stack<int>&s)
+{
+	if (s.empty())
+		return;
+	int x = s.top();
+	s.pop();
+	// recursively reverse the smaller stack
+	reverseStack(s);
+	//insert the element x at the bottom of stack
+	insertAtBottom(s, x);
 }
 
 int main()
